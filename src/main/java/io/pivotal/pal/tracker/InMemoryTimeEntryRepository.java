@@ -4,13 +4,15 @@ import java.util.*;
 
 public class InMemoryTimeEntryRepository implements TimeEntryRepository{
 
-
-
     Map<Long , TimeEntry> entryMap = new HashMap<Long, TimeEntry>();
+
+    public long entryId;
 
     @Override
     public TimeEntry create(TimeEntry entry) {
-        entryMap.put(entry.getId(), entry);
+        long id=++entryId;
+        entry.setId(id);
+        entryMap.put(id, entry);
         return entry;
     }
 
@@ -32,7 +34,8 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository{
 
     @Override
     public TimeEntry update(long id, TimeEntry entry) {
-        entryMap.put(id, entry);
+        entry.setId(id);
+        entryMap.replace(id, entry);
         return entryMap.get(id);
     }
 

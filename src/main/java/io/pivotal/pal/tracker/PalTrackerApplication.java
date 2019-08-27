@@ -11,13 +11,12 @@ public class PalTrackerApplication {
         SpringApplication.run(PalTrackerApplication.class, args);
     }
 
-    @Autowired
-    TimeEntryRepository timeEntryRepository;
+
 
     @Bean
     public TimeEntryRepository getRepository(){
 
-        return timeEntryRepository;
+        return new InMemoryTimeEntryRepository();
 
     }
 }
